@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUREA LIVE • Premium Ticketing Ecosystem</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#0B0B0F;
+    --card:#13131A;
+    --card2:#1B1B24;
+    --border:rgba(255,255,255,.08);
+    --primary:#0A84FF;
+    --primary2:#5AC8FA;
+    --green:#32D74B;
+    --green2:#1FAE39;
+    --text:#FFFFFF;
+    --muted:#A1A1AA;
+    --danger:#FF453A;
+    --gold:#FFD60A;
+    --shadow:0 20px 50px rgba(0,0,0,.45);
+    --radius:28px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top left,#12213f 0%,transparent 30%),
+    radial-gradient(circle at top right,#07111e 0%,transparent 25%),
+    #0B0B0F;
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:999;
+    backdrop-filter:blur(24px);
+    background:rgba(11,11,15,.75);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:900;
+    font-size:1.3rem;
+    letter-spacing:-1px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo i{
+    color:var(--primary2);
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.truefan-pill{
+    background:linear-gradient(135deg,#0A84FF,#5AC8FA);
+    padding:8px 14px;
+    border-radius:50px;
+    font-size:.75rem;
+    font-weight:800;
+    display:none;
+}
+
+.app{
+    max-width:1500px;
+    margin:110px auto 80px;
+    padding:0 30px;
+}
+
+.view{
+    display:none;
+}
+
+.view.active{
+    display:block;
+}
+
+.hero{
+    margin-bottom:45px;
+}
+
+.hero h1{
+    font-size:4.5rem;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-4px;
+    margin-bottom:14px;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:1.15rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:28px;
+}
+
+.card{
+    background:linear-gradient(180deg,#171720,#101015);
+    border:1px solid var(--border);
+    border-radius:30px;
+    overflow:hidden;
+    transition:.4s;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.01);
+    border-color:rgba(90,200,250,.35);
+}
+
+.card-image{
+    height:230px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+.card-image::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,#111 5%,transparent 70%);
+}
+
+.live-tag{
+    position:absolute;
+    top:18px;
+    left:18px;
+    background:rgba(0,0,0,.6);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+    padding:8px 12px;
+    border-radius:50px;
+    z-index:2;
+    font-size:.72rem;
+    font-weight:800;
+}
+
+.card-content{
+    padding:24px;
+}
+
+.card-content h3{
+    font-size:1.4rem;
+    margin-bottom:10px;
+}
+
+.meta{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    color:var(--muted);
+    font-size:.92rem;
+}
+
+.glass{
+    background:rgba(19,19,26,.85);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:40px;
+    backdrop-filter:blur(20px);
+    box-shadow:var(--shadow);
+}
+
+.btn{
+    border:none;
+    padding:16px 28px;
+    border-radius:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    font-size:1rem;
+    color:white;
+    background:linear-gradient(135deg,#0A84FF,#5AC8FA);
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-green{
+    background:linear-gradient(135deg,#32D74B,#1FAE39);
+}
+
+.btn-dark{
+    background:#22232D;
+}
+
+.verify-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:30px;
+}
+
+.tf-score{
+    background:#0f1724;
+    border:1px solid rgba(255,255,255,.06);
+    padding:25px;
+    border-radius:24px;
+    margin-top:25px;
+}
+
+.tf-score h3{
+    margin-bottom:18px;
+}
+
+.score-line{
+    margin-bottom:16px;
+}
+
+.bar{
+    height:10px;
+    background:#222;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.bar-fill{
+    height:100%;
+    background:linear-gradient(90deg,#0A84FF,#5AC8FA);
+}
+
+.merch-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    max-height:380px;
+    overflow:auto;
+    padding-right:10px;
+}
+
+.merch-item{
+    background:#181820;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+input{
+    width:100%;
+    background:#181820;
+    border:1px solid rgba(255,255,255,.08);
+    color:white;
+    padding:15px;
+    border-radius:14px;
+    margin-top:10px;
+}
+
+.queue-box{
+    text-align:center;
+}
+
+.spinner{
+    width:70px;
+    height:70px;
+    border:5px solid rgba(255,255,255,.08);
+    border-top:5px solid #0A84FF;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 30px;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+.arena-wrapper{
+    display:grid;
+    grid-template-columns:1fr 370px;
+    gap:35px;
+}
+
+.venue{
+    background:#0E0E13;
+    border-radius:30px;
+    padding:35px;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.stage{
+    height:80px;
+    border-radius:30px;
+    background:linear-gradient(180deg,#555,#222);
+    margin-bottom:40px;
+    text-align:center;
+    line-height:80px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.seats{
+    display:grid;
+    grid-template-columns:repeat(16,1fr);
+    gap:10px;
+}
+
+.seat{
+    width:100%;
+    aspect-ratio:1;
+    border-radius:10px;
+    transition:.25s;
+    cursor:pointer;
+    position:relative;
+}
+
+.available{
+    background:#2C2C35;
+}
+
+.available:hover{
+    transform:scale(1.12);
+    background:#0A84FF;
+}
+
+.selected{
+    background:#0A84FF;
+    box-shadow:0 0 18px rgba(10,132,255,.8);
+}
+
+.occupied{
+    background:#15151A;
+    opacity:.25;
+    cursor:not-allowed;
+}
+
+.truesale{
+    background:linear-gradient(135deg,#32D74B,#1FAE39);
+    box-shadow:0 0 18px rgba(50,215,75,.6);
+}
+
+.seat::after{
+    position:absolute;
+    bottom:-22px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:.55rem;
+    font-weight:800;
+}
+
+.truesale::after{
+    content:'TRUESALE';
+    color:#32D74B;
+}
+
+.side-panel{
+    background:#121219;
+    border-radius:28px;
+    padding:28px;
+    border:1px solid rgba(255,255,255,.06);
+    height:fit-content;
+    position:sticky;
+    top:120px;
+}
+
+.legend{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top:25px;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--muted);
+}
+
+.dot{
+    width:18px;
+    height:18px;
+    border-radius:6px;
+}
+
+.payment-box{
+    max-width:850px;
+    margin:auto;
+}
+
+.nom-card{
+    background:#16161F;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:25px;
+    margin-bottom:22px;
+}
+
+.nom-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.ticket{
+    background:white;
+    color:#111;
+    border-radius:30px;
+    overflow:hidden;
+    display:flex;
+    margin-bottom:25px;
+}
+
+.ticket-left{
+    flex:1;
+    padding:35px;
+    border-right:2px dashed #ddd;
+}
+
+.ticket-right{
+    width:240px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fafafa;
+}
+
+.qr{
+    width:150px;
+    height:150px;
+    background:
+    repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 6px,
+        #fff 6px,
+        #fff 12px
+    );
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    border-radius:50px;
+    background:#EBFFF0;
+    color:#1FAE39;
+    font-size:.8rem;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.security-box{
+    margin-top:18px;
+    background:#F5F7FA;
+    border-radius:18px;
+    padding:18px;
+}
+
+.small{
+    font-size:.8rem;
+    color:var(--muted);
+}
+
+@media(max-width:1000px){
+
+    .verify-grid,
+    .arena-wrapper,
+    .nom-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .seats{
+        grid-template-columns:repeat(10,1fr);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo" onclick="app.navigate('home')">
+<i class="fa-solid fa-wave-square"></i>
+AUREA TICKETS
+</div>
+
+<div class="top-right">
+
+<div class="truefan-pill" id="tf-pill">
+TRUEFAN VERIFIED
+</div>
+
+<i class="fa-solid fa-circle-user" style="font-size:1.7rem"></i>
+
+</div>
+
+</header>
+
+<div class="app">
+
+<!-- HOME -->
+
+<section class="view active" id="home">
+
+<div class="hero">
+<h1>Experiències Live.</h1>
+<p>Ticketing premium, nominalització intel·ligent i TrueSale™ segur.</p>
+</div>
+
+<div class="grid" id="concertGrid"></div>
+
+</section>
+
+<!-- TRUEFAN -->
+
+<section class="view" id="truefan">
+
+<div class="glass">
+
+<div class="verify-grid">
+
+<div>
+
+<h2 style="font-size:2.3rem;margin-bottom:15px">
+Sistema TrueFan™
+</h2>
+
+<p style="color:var(--muted);line-height:1.7">
+Connecta Spotify i afegeix merchandising oficial.
+Com més activitat real tinguis, més prioritat obtindràs.
+El sistema analitza:
+</p>
+
+<div class="tf-score">
+
+<h3>Nivell d'autenticitat</h3>
+
+<div class="score-line">
+<div>Hores escoltades</div>
+<div class="bar">
+<div class="bar-fill" style="width:91%"></div>
+</div>
+</div>
+
+<div class="score-line">
+<div>Concerts assistits</div>
+<div class="bar">
+<div class="bar-fill" style="width:78%"></div>
+</div>
+</div>
+
+<div class="score-line">
+<div>Merchandising oficial</div>
+<div class="bar">
+<div class="bar-fill" id="merchBar" style="width:10%"></div>
+</div>
+</div>
+
+</div>
+
+<button class="btn" onclick="app.connectSpotify()">
+<i class="fa-brands fa-spotify"></i>
+Connectar Spotify
+</button>
+
+<div id="spotifySuccess" style="display:none;margin-top:25px">
+
+<div style="background:#13211A;border:1px solid rgba(50,215,75,.3);padding:20px;border-radius:20px">
+<h3 style="color:#32D74B;margin-bottom:10px">
+<i class="fa-solid fa-circle-check"></i>
+Compte verificat
+</h3>
+
+<p style="color:#D1FAE5">
+Top 2% listeners · 18.240 minuts escoltats
+</p>
+</div>
+
+<div style="margin-top:30px">
+
+<h3 style="margin-bottom:15px">
+Afegir merchandising oficial
+</h3>
+
+<div style="display:flex;gap:15px">
+<input id="merchInput" placeholder="Ex: Hoodie VIP Tour 2025">
+<button class="btn btn-green" onclick="app.addMerch()">
+Afegir
+</button>
+</div>
+
+<div class="merch-list" id="merchList"></div>
+
+</div>
+
+<button class="btn" style="margin-top:30px" onclick="app.startQueue()">
+Entrar a la prevenda TrueFan
+<i class="fa-solid fa-arrow-right"></i>
+</button>
+
+</div>
+
+</div>
+
+<div>
+
+<div style="background:#0E1016;border-radius:30px;padding:28px;border:1px solid rgba(255,255,255,.06)">
+
+<h3 style="margin-bottom:20px">
+Beneficis TrueFan™
+</h3>
+
+<div style="display:flex;flex-direction:column;gap:18px">
+
+<div>
+<h4>✔ Prevenda real</h4>
+<p class="small">Accés abans de la venda pública</p>
+</div>
+
+<div>
+<h4>✔ Anti-scalpers</h4>
+<p class="small">Nominalització amb verificació documental</p>
+</div>
+
+<div>
+<h4>✔ TrueSale™</h4>
+<p class="small">Revenda oficial dins la plataforma</p>
+</div>
+
+<div>
+<h4>✔ Mapa dinàmic</h4>
+<p class="small">Entrades TrueSale en verd en temps real</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- QUEUE -->
+
+<section class="view" id="queue">
+
+<div class="glass queue-box">
+
+<div class="spinner"></div>
+
+<h2 id="queueTitle">Cua virtual premium</h2>
+
+<p style="color:var(--muted);margin-top:12px">
+No tanquis aquesta finestra.
+La teva sessió està protegida.
+</p>
+
+<div style="margin-top:40px">
+
+<div style="font-size:.8rem;color:var(--muted)">
+FANS DAVANT TEU
+</div>
+
+<h1 id="queueCount" style="font-size:5rem;color:#0A84FF">
+842
+</h1>
+
+<p id="queueTime">
+Temps estimat: 32 segons
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SELECTION -->
+
+<section class="view" id="selection">
+
+<div class="arena-wrapper">
+
+<div class="venue">
+
+<div class="stage">
+MAIN STAGE
+</div>
+
+<div class="seats" id="seats"></div>
+
+</div>
+
+<div class="side-panel">
+
+<h2 id="eventName">Concert</h2>
+
+<p style="margin-top:10px;color:var(--muted)" id="eventMeta"></p>
+
+<div class="legend">
+
+<div class="legend-item">
+<div class="dot" style="background:#2C2C35"></div>
+Disponible
+</div>
+
+<div class="legend-item">
+<div class="dot" style="background:#0A84FF"></div>
+Seleccionat
+</div>
+
+<div class="legend-item">
+<div class="dot" style="background:#32D74B"></div>
+TrueSale™
+</div>
+
+</div>
+
+<div style="margin-top:35px">
+
+<div style="font-size:.9rem;color:var(--muted)">
+Seleccionats
+</div>
+
+<h1 id="seatCount">0</h1>
+
+<h2 id="totalPrice">0 €</h2>
+
+<button class="btn" style="width:100%;margin-top:25px" onclick="app.checkout()">
+Continuar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CHECKOUT -->
+
+<section class="view" id="checkout">
+
+<div class="glass payment-box">
+
+<h2 style="font-size:2.2rem;margin-bottom:30px">
+Pagament segur
+</h2>
+
+<div class="nom-grid">
+
+<div>
+<label>Nom titular targeta</label>
+<input placeholder="Nom complet">
+
+<label>Número targeta</label>
+<input placeholder="4242 4242 4242 4242">
+
+<label>Email</label>
+<input placeholder="fan@email.com">
+</div>
+
+<div>
+<label>Caducitat</label>
+<input placeholder="MM/AA">
+
+<label>CVC</label>
+<input placeholder="123">
+
+<label>Telèfon</label>
+<input placeholder="+34 600 000 000">
+</div>
+
+</div>
+
+<div style="margin-top:35px">
+
+<div style="display:flex;justify-content:space-between;margin-bottom:12px">
+<span>Entrades</span>
+<span id="checkoutSubtotal"></span>
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-bottom:12px">
+<span>Taxa TrueFan™</span>
+<span>5,90 €</span>
+</div>
+
+<div style="display:flex;justify-content:space-between;font-size:1.4rem;font-weight:800;border-top:1px solid rgba(255,255,255,.08);padding-top:18px">
+<span>Total</span>
+<span id="checkoutTotal"></span>
+</div>
+
+</div>
+
+<button class="btn" style="width:100%;margin-top:35px" onclick="app.paymentSuccess()">
+Pagar ara
+</button>
+
+</div>
+
+</section>
+
+<!-- NOMINAL -->
+
+<section class="view" id="nominal">
+
+<div class="glass">
+
+<h2 style="font-size:2.4rem;margin-bottom:12px">
+Nominalització obligatòria
+</h2>
+
+<p style="color:var(--muted);line-height:1.7;margin-bottom:35px">
+Cada entrada queda vinculada legalment a un assistent.
+El dia de l'esdeveniment es validarà:
+DNI/NIE/PASSAPORT + QR dinàmic + verificació facial opcional.
+</p>
+
+<div id="nominalForms"></div>
+
+<button class="btn" style="width:100%;margin-top:30px" onclick="app.generateTickets()">
+Generar entrades oficials
+</button>
+
+</div>
+
+</section>
+
+<!-- TICKETS -->
+
+<section class="view" id="tickets">
+
+<div class="hero">
+<h1>Entrades generades.</h1>
+<p>TrueTicket™ Security Enabled</p>
+</div>
+
+<div id="ticketList"></div>
+
+</section>
+
+</div>
+
+<script>
+
+const app = {
+
+events:[
+
+{
+id:1,
+artist:"The Weeknd",
+tour:"After Hours Til Downt World Tour",
+venue:"Estadi Olímpic Barcelona",
+date:"01 Setembre 2026",
+price:140,
+img:"https://www.rollingstone.com/wp-content/uploads/2025/11/the-weeknd-billion-dollar-tour.jpg?w=1581&h=1054&crop=1"
+},
+
+{
+id:2,
+artist:"Olivia Rodrigo",
+tour:"The Unraveled World Tour",
+venue:"Palau Sant Jordi",
+date:"02 MAIG 2027",
+price:220,
+img:"https://s.yimg.com/ny/api/res/1.2/3o_Nwz6N.AnTzmw28u5I7g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTIwMDA7aD0xMzM0O2NmPXdlYnA-/https://media.zenfs.com/en/democrat-and-chronicle/985cb24b6315f8183aa2eb364e3204ed"
+},
+
+{
+id:3,
+artist:"Bad Bunny",
+tour:"Debí Tirar Más Fotos World Tour",
+venue:"Madrid Arena",
+date:"20 JUNY 2026",
+price:160,
+img:"https://dynamicmedia.livenationinternational.com/l/e/n/0f4152a7-9281-424a-8521-51469d4e2f90.jpg?format=webp&width=1920&quality=75"
+},
+
+{
+id:4,
+artist:"Rosalía",
+tour:"LUX World Tour",
+venue:"Palau Sant Jordi",
+date:"14 ABRIL 2026",
+price:75,
+img:"https://estaticos-cdn.prensaiberica.es/clip/3871ddb8-67c8-4e73-bc83-89027750f629_16-9-discover-aspect-ratio_default_0_x1000y444.jpg"
+},
+
+{
+id:5,
+artist:"Aitana",
+tour:"Cuarto Azul World Tour",
+venue:"Paris La Défense Arena",
+date:"02 AGOST 2026",
+price:35,
+img:"https://image.europafm.com/clipping/cmsimages01/2025/07/28/16A2F976-D007-4D91-99C9-DC41397DD334/posibles-cambios-conciertos-aitana-madrid-estadi-olimpic-barcelona_98.jpg?crop=4166,2344,x0,y0&width=1900&height=1069&optimize=low&format=webply"
+},
+
+{
+id:6,
+artist:"Quevedo",
+tour:"El Baifo World Tour",
+venue:"Palau Sant Jordi XXL",
+date:"16 NOV 2026",
+price:38,
+img:"https://www.billboard.com/wp-content/uploads/2025/02/quevedo-press-credit-Adrian-Rios-2025-billboard-1548.jpg"
+},
+
+{
+id:7,
+artist:"Priamavera Sound",
+tour:"Primavera Sound 2026",
+venue:"Parc del Forum",
+date:"03-06 JUNY 2026",
+price:350,
+img:"https://assets-img.primaverasound.com/730x520/psweb/5gmgz201qn8t6d2g1b5l_1760720474829.jpg"
+},
+
+{
+id:8,
+artist:"Amaia",
+tour:"Arenas Tour",
+venue:"Palau Sant Jordi",
+date:"21 DEC 2026",
+price:34,
+img:"https://api-cdn.arte.tv/img/v2/image/XTULF3WLQBcJkjiibCrpe9/940x530"
+},
+
+{
+id:9,
+artist:"Conan Gray",
+tour:"Wishbone World Tour",
+venue:"Palacio Vistalegre",
+date:"6 JUNY 2026",
+price:115,
+img:"https://revistalacorahe.com/wp-content/uploads/2025/10/CG-Ticketmaster-2426x1365-1-2048x1152-1.jpg"
+},
+
+{
+id:10,
+artist:"Oques Grasses",
+tour:"Final de Gira",
+venue:"Estadi Olímpic Lluis Companys",
+date:"10 OCT 2026",
+price:145,
+img:"https://files.theproject.es/archivos/oques_grasses.jpg"
+},
+
+{
+id:11,
+artist:"El Último de la Fila",
+tour:"Inserso World Tour",
+venue:"Sant Jordi Club",
+date:"19 MAIG 2026",
+price:99,
+img:"https://elultimodelafila.com/wp-content/uploads/2025/04/1920x1080.jpg"
+},
+
+{
+id:12,
+artist:"La Fúmiga",
+tour:"Tot s'acaba",
+venue:"Sant Jordi Club",
+date:"19 NOVEMBRE 2026",
+price:25,
+img:"https://halleyrecords.com/wp-content/uploads/2025/07/La-Fumiga_C.png"
+},
+
+],
+
+state:{
+selected:[],
+current:null,
+merchCount:0
+},
+
+init(){
+
+this.renderEvents();
+
+},
+
+navigate(id){
+
+document.querySelectorAll('.view').forEach(v=>{
+v.classList.remove('active');
+});
+
+document.getElementById(id).classList.add('active');
+
+window.scrollTo(0,0);
+
+},
+
+renderEvents(){
+
+const grid=document.getElementById('concertGrid');
+
+this.events.forEach(e=>{
+
+grid.innerHTML += `
+<div class="card" onclick="app.openEvent(${e.id})">
+
+<div class="card-image" style="background-image:url('${e.img}')">
+
+<div class="live-tag">
+LIVE EVENT
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>${e.artist}</h3>
+
+<div class="meta">
+
+<div>
+<i class="fa-solid fa-ticket"></i>
+${e.tour}
+</div>
+
+<div>
+<i class="fa-solid fa-location-dot"></i>
+${e.venue}
+</div>
+
+<div>
+<i class="fa-solid fa-calendar"></i>
+${e.date}
+</div>
+
+<div>
+<i class="fa-solid fa-euro-sign"></i>
+Des de ${e.price}€
+</div>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+
+},
+
+openEvent(id){
+
+this.state.current=this.events.find(e=>e.id===id);
+
+this.navigate('truefan');
+
+},
+
+connectSpotify(){
+
+document.getElementById('spotifySuccess').style.display='block';
+
+document.getElementById('tf-pill').style.display='flex';
+
+},
+
+addMerch(){
+
+const input=document.getElementById('merchInput');
+
+if(!input.value) return;
+
+const list=document.getElementById('merchList');
+
+this.state.merchCount++;
+
+list.innerHTML += `
+<div class="merch-item">
+
+<div>
+<h4>${input.value}</h4>
+<p class="small">
+Compra validada · Official Store
+</p>
+</div>
+
+<div style="color:#32D74B;font-weight:800">
+VALIDAT
+</div>
+
+</div>
+`;
+
+const percentage=Math.min(100,10 + (this.state.merchCount*8));
+
+document.getElementById('merchBar').style.width=percentage+'%';
+
+input.value='';
+
+},
+
+startQueue(){
+
+this.navigate('queue');
+
+let count=842;
+let time=32;
+
+const interval=setInterval(()=>{
+
+count -= Math.floor(Math.random()*55);
+
+if(count<0) count=0;
+
+time--;
+
+document.getElementById('queueCount').innerText=count;
+document.getElementById('queueTime').innerText='Temps estimat: '+time+' segons';
+
+if(time<=0){
+
+clearInterval(interval);
+
+this.renderSeats();
+
+this.navigate('selection');
+
+}
+
+},1000);
+
+},
+
+renderSeats(){
+
+document.getElementById('eventName').innerText=this.state.current.artist;
+document.getElementById('eventMeta').innerText=
+this.state.current.venue+' · '+this.state.current.date;
+
+const seats=document.getElementById('seats');
+
+seats.innerHTML='';
+
+for(let i=0;i<240;i++){
+
+const div=document.createElement('div');
+
+const occupied=Math.random()<0.28;
+const truesale=Math.random()<0.10;
+
+div.classList.add('seat');
+
+if(occupied){
+
+div.classList.add('occupied');
+
+}else if(truesale){
+
+div.classList.add('truesale');
+
+}else{
+
+div.classList.add('available');
+
+}
+
+div.onclick=()=>this.toggleSeat(div,i);
+
+seats.appendChild(div);
+
+}
+
+},
+
+toggleSeat(el,id){
+
+if(el.classList.contains('occupied')) return;
+
+if(el.classList.contains('selected')){
+
+el.classList.remove('selected');
+
+this.state.selected=
+this.state.selected.filter(x=>x!==id);
+
+}else{
+
+if(this.state.selected.length>=4){
+
+alert('Màxim 4 entrades per usuari verificat.');
+
+return;
+
+}
+
+el.classList.add('selected');
+
+this.state.selected.push(id);
+
+}
+
+const total=this.state.selected.length*this.state.current.price;
+
+document.getElementById('seatCount').innerText=
+this.state.selected.length;
+
+document.getElementById('totalPrice').innerText=
+total.toFixed(2)+' €';
+
+},
+
+checkout(){
+
+if(this.state.selected.length===0){
+
+alert('Selecciona almenys una entrada.');
+
+return;
+
+}
+
+const subtotal=this.state.selected.length*this.state.current.price;
+const total=subtotal+5.90;
+
+document.getElementById('checkoutSubtotal').innerText=
+subtotal.toFixed(2)+' €';
+
+document.getElementById('checkoutTotal').innerText=
+total.toFixed(2)+' €';
+
+this.navigate('checkout');
+
+},
+
+paymentSuccess(){
+
+this.renderNominal();
+
+this.navigate('nominal');
+
+},
+
+renderNominal(){
+
+const container=document.getElementById('nominalForms');
+
+container.innerHTML='';
+
+this.state.selected.forEach((seat,index)=>{
+
+container.innerHTML += `
+
+<div class="nom-card">
+
+<h3 style="margin-bottom:20px">
+Entrada #${index+1}
+</h3>
+
+<div class="nom-grid">
+
+<div>
+
+<label>Nom legal complet</label>
+<input class="nom-name" placeholder="Tal com apareix al document">
+
+<label>DNI / NIE / Passaport</label>
+<input class="nom-doc" placeholder="Document oficial">
+
+<label>Data naixement</label>
+<input type="date" class="nom-birth">
+
+</div>
+
+<div>
+
+<label>Email assistent</label>
+<input class="nom-mail" placeholder="email@domini.com">
+
+<label>Telèfon assistent</label>
+<input class="nom-phone" placeholder="+34 600 000 000">
+
+<label>País emissió document</label>
+<input class="nom-country" placeholder="Espanya">
+
+</div>
+
+</div>
+
+<div style="margin-top:25px">
+
+<label>Confirmació legal</label>
+
+<div style="display:flex;gap:12px;margin-top:12px">
+
+<input type="checkbox" style="width:20px;height:20px;margin-top:0">
+
+<p class="small" style="line-height:1.6">
+Confirmo que les dades són correctes i accepto
+la verificació documental a l'accés de l'esdeveniment.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+},
+
+generateTickets(){
+
+this.navigate('tickets');
+
+const list=document.getElementById('ticketList');
+
+list.innerHTML='';
+
+const names=document.querySelectorAll('.nom-name');
+const docs=document.querySelectorAll('.nom-doc');
+const mails=document.querySelectorAll('.nom-mail');
+
+this.state.selected.forEach((s,i)=>{
+
+list.innerHTML += `
+
+<div class="ticket">
+
+<div class="ticket-left">
+
+<div class="badge">
+<i class="fa-solid fa-shield-check"></i>
+TRUEFAN VERIFIED
+</div>
+
+<h2 style="font-size:2rem;margin-bottom:10px">
+${this.state.current.artist}
+</h2>
+
+<p style="margin-bottom:18px">
+${this.state.current.tour}
+</p>
+
+<p style="margin-bottom:8px">
+<i class="fa-solid fa-location-dot"></i>
+${this.state.current.venue}
+</p>
+
+<p style="margin-bottom:25px">
+<i class="fa-solid fa-calendar"></i>
+${this.state.current.date}
+</p>
+
+<div class="security-box">
+
+<h4 style="margin-bottom:14px">
+Titular verificat
+</h4>
+
+<p><b>Nom:</b> ${names[i].value}</p>
+<p><b>Document:</b> ${docs[i].value}</p>
+<p><b>Email:</b> ${mails[i].value}</p>
+
+</div>
+
+<div style="margin-top:20px">
+
+<p class="small">
+Entrada nominal protegida amb tecnologia TrueTicket™,
+QR dinàmic anti-captures i validació documental.
+</p>
+
+</div>
+
+</div>
+
+<div class="ticket-right">
+
+<div class="qr"></div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+};
+
+window.onload=()=>app.init();
+
+</script>
+
+</body>
+</html>
